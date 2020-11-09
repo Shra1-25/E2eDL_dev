@@ -117,6 +117,12 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       edm::EDGetTokenT<TrackingRecHitCollection> TRKRecHitCollectionT_;
       edm::EDGetTokenT<edm::View<reco::Jet> > recoJetsT_;
       edm::EDGetTokenT<EBDigiCollection>     EBDigiCollectionT_;
+   
+      // Detector image switches
+      bool doECALstitched;
+      bool doTracksAtECALstitchedPt;
+      bool doTracksAtECALadjPt;
+      bool doHBHEenergy;
       
       static const int nPhotons = 2;
       
