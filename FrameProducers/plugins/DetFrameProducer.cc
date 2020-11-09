@@ -107,7 +107,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
    	std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(ECALstitched_energy_edm), "ECALstitchedenergy");
-   	vJetFrames.push_back(doECALstitched);
+   	vJetFrames.push_back(vECAL_energy_);
    }
 
    if (doTracksAtECALstitchedPt){
@@ -137,7 +137,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	std::unique_ptr<e2e::Frame1D> TracksECALadjPt_max_edm (new e2e::Frame1D(vECALadj_tracksPt_max_[0]));
    	std::cout<<" >> Size of max Pt Track vector at ECAL adjustable is : "<<std::move(TracksECALadjPt_max_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(TracksECALadjPt_max_edm),"TracksAtECALadjPtMax");
-   	vJetFrames.push_back(vECALadj_tracksPt_);
+   	vJetFrames.push_back(vECALadj_tracksPt_[0]);
    }	
    std::unique_ptr<e2e::Frame2D> vJetFrames_edm (new e2e::Frame2D(vJetFrames));
    iEvent.put(std::move(vJetFrames_edm), "DetFrames");
