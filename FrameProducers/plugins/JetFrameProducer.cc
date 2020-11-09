@@ -9,7 +9,7 @@ JetFrameProducer::JetFrameProducer(const edm::ParameterSet& iConfig)
   //TracksAtECALstitchedPt_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("TracksAtECALstitchedPt"));
   //HBHEenergy_token = consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("HBHEenergy"));
   //TracksAtECALadjPt_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("TracksAtECALadjPt"));
-  vDetFramesT_ = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("DetFrames"))
+  vDetFramesT_ = consumes<e2e::Frame2D>(iConfig.getParameter<edm::InputTag>("DetFrames"))
   vertexCollectionT_       = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("vertexCollection"));
   
   TRKRecHitCollectionT_   = consumes<TrackingRecHitCollection>(iConfig.getParameter<edm::InputTag>("trackRecHitCollection"));
