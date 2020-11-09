@@ -13,11 +13,11 @@ options.register('processMode',
     mytype=VarParsing.VarParsing.varType.string,
     info = "process mode: JetLevel or EventLevel")
 # Set doEBenergy to 1 to produce EGSeeds and EGFrames.
-options.register('doEBenergy',
-    default=False,
-    mult=VarParsing.VarParsing.multiplicity.singleton,
-    mytype=VarParsing.VarParsing.varType.bool,
-    info = "set doEBenergy")
+#options.register('doEBenergy',
+#    default=False,
+#    mult=VarParsing.VarParsing.multiplicity.singleton,
+#    mytype=VarParsing.VarParsing.varType.bool,
+#    info = "set doEBenergy")
 # Set doECALstitched to 1 to produce JetSeeds and JetFrames.
 options.register('doECALstitched',
     default=True,
