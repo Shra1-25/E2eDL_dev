@@ -5,10 +5,11 @@ JetFrameProducer::JetFrameProducer(const edm::ParameterSet& iConfig)
   photonCollectionT_ = consumes<PhotonCollection>(iConfig.getParameter<edm::InputTag>("photonCollection"));
   EBRecHitCollectionT_    = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("reducedEBRecHitCollection"));
   HBHERecHitCollectionT_  = consumes<HBHERecHitCollection>(iConfig.getParameter<edm::InputTag>("reducedHBHERecHitCollection"));
-  ECALstitched_energy_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("ECALstitchedenergy"));
-  TracksAtECALstitchedPt_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("TracksAtECALstitchedPt"));
-  HBHEenergy_token = consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("HBHEenergy"));
-  TracksAtECALadjPt_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("TracksAtECALadjPt"));
+  //ECALstitched_energy_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("ECALstitchedenergy"));
+  //TracksAtECALstitchedPt_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("TracksAtECALstitchedPt"));
+  //HBHEenergy_token = consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("HBHEenergy"));
+  //TracksAtECALadjPt_token=consumes<e2e::Frame1D>(iConfig.getParameter<edm::InputTag>("TracksAtECALadjPt"));
+  vDetFramesT_ = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("DetFrames"))
   vertexCollectionT_       = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("vertexCollection"));
   
   TRKRecHitCollectionT_   = consumes<TrackingRecHitCollection>(iConfig.getParameter<edm::InputTag>("trackRecHitCollection"));
@@ -42,7 +43,7 @@ JetFrameProducer::JetFrameProducer(const edm::ParameterSet& iConfig)
   doTracksAtECALstitchedPt = iConfig.getParameter<bool>("doTracksAtECALstitchedPt");
   doTracksAtECALadjPt = iConfig.getParameter<bool>("doTracksAtECALadjPt");
   doHBHEenergy = iConfig.getParameter<bool>("doHBHEenergy");
-  
+	
   // Output collections to be produced
   produces<e2e::Frame2D> ("JetSeeds");
   produces<e2e::Frame4D> ("JetFrames");
@@ -88,55 +89,18 @@ JetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    }
    std::cout<<std::endl;
    
-   edm::Handle<e2e::Frame1D> ECALstitched_energy_handle;
-   iEvent.getByToken(ECALstitched_energy_token, ECALstitched_energy_handle);
-   edm::Handle<e2e::Frame1D> TracksAtECALstitchedPt_handle;
-   iEvent.getByToken(TracksAtECALstitchedPt_token, TracksAtECALstitchedPt_handle);   
-   edm::Handle<e2e::Frame1D> TracksAtECALadjPt_handle;
-   iEvent.getByToken(TracksAtECALadjPt_token, TracksAtECALadjPt_handle);
-   edm::Handle<e2e::Frame1D> HBHEenergy_handle;
-   iEvent.getByToken(HBHEenergy_token, HBHEenergy_handle);
-	
-   e2e::Frame1D vECALstitched = *ECALstitched_energy_handle;
-   e2e::Frame1D vTracksAtECALstitchedPt = *TracksAtECALstitchedPt_handle;
-   e2e::Frame1D vTracksAtECALadjPt = *TracksAtECALadjPt_handle;
-   e2e::Frame1D vHBHEenergy = *HBHEenergy_handle;
-   e2e::Frame1D* vECALstitchedptr = &vECALstitched;
-   e2e::Frame1D* vTracksAtECALstitchedPtptr = &vTracksAtECALstitchedPt;
-   e2e::Frame1D* vTracksAtECALadjPtptr = &vTracksAtECALadjPt;
+   edm::Handle<e2e::Frame2D> vDetFrames_handle;
+   iEvent.getByToken(vDetFramesT_, vDetFrames_handle);
+   e2e::Frame2D vDetFrames = *vDetFrames_handle;
+  
    //Performing Striding on HBHE Frames.
-   e2e::Frame1D vHBHEenergy_strided = frameStriding(vHBHEenergy, int(nDetImgH/nStrideH), int(nDetImgW/nStrideW), nStrideH, nStrideW);
-   e2e::Frame1D* vHBHEenergyptr = &vHBHEenergy_strided;
+   if(doHBHEenergy) vDetFrames[0] = frameStriding(vDetFrames[0], int(nDetImgH/nStrideH), int(nDetImgW/nStrideW), nStrideH, nStrideW);
 	
    // Put collections into output EDM file
    std::unique_ptr<e2e::Frame2D> cJetSeeds (new e2e::Frame2D(vJetSeeds));
-   iEvent.put( std::move(cJetSeeds),  "JetSeeds"  ); 
-
-   //Setting frame depth to based on layers selected 	
-   unsigned int nFrameD =0;
-   std::vector<std::string> vLayerNameMap;
-   std::vector<e2e::Frame1D*> vLayerPointerMap;
-   if (doECALstitched){
-   	nFrameD++;
-	vLayerNameMap.push_back("ECALstitched");
-	vLayerPointerMap.push_back(vECALstitchedptr);
-   }
-   if (doTracksAtECALstitchedPt){
-   	nFrameD++;
-	vLayerNameMap.push_back("TracksAtECALstitched");
-	vLayerPointerMap.push_back(vTracksAtECALstitchedPtptr);
-   }
-   if (doTracksAtECALadjPt){
-   	nFrameD++;
-	vLayerNameMap.push_back("TracksAtECALadj");
-	vLayerPointerMap.push_back(vTracksAtECALadjPtptr);
-   }
-   if (doHBHEenergy){
-   	nFrameD++;
-	vLayerNameMap.push_back("HBHEenergy");
-	vLayerPointerMap.push_back(vHBHEenergyptr);
-   }	
+   iEvent.put( std::move(cJetSeeds),  "JetSeeds"  );
    
+   unsigned int nFrameD = vDetFrames.size();	
    std::vector<e2e::Frame3D> vJetFrames (vJetSeeds.size(),
 				      e2e::Frame3D(nFrameD,
 				      e2e::Frame2D(nFrameH,
@@ -150,7 +114,7 @@ JetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 		vJetSeed_[0] = vJetSeeds[idx][0];
 		vJetSeed_[1] = vJetSeeds[idx][1];
 		for (int layer_idx=0; layer_idx<int(nFrameD); layer_idx++){
-			e2e::getFrame(vJetFrames[idx][layer_idx], vJetSeed_, vLayerPointerMap[layer_idx], nDetImgH, nDetImgW);
+			e2e::getFrame(vJetFrames[idx][layer_idx], vJetSeed_, vDetFrames[layer_idx], nDetImgH, nDetImgW);
 		}	
 	}
    }
