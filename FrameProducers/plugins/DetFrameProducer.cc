@@ -44,7 +44,13 @@ DetFrameProducer::DetFrameProducer(const edm::ParameterSet& iConfig)
     totalPhiBins[proj] = granularityMultiPhi[proj] * granularityMultiECAL*HBHE_IPHI_NUM;
 
   }
-  
+	
+  // Detector image switches
+  doECALstitched = iConfig.getParameter<bool>("doECALstitched");
+  doTracksAtECALstitchedPt = iConfig.getParameter<bool>("doTracksAtECALstitchedPt");
+  doTracksAtECALadjPt = iConfig.getParameter<bool>("doTracksAtECALadjPt");
+  doHBHEenergy = iConfig.getParameter<bool>("doHBHEenergy");
+	
   //produces<float>("photonClasses").setBranchAlias("PhotonClass");
  produces<e2e::Frame1D>("EBenergy");
  produces<e2e::Frame1D>("HBHEenergy");
@@ -82,45 +88,58 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    std::cout<<" >> Adding EB done "<<std::endl;
    std::cout<<" >> Size of EB Energy vector is: "<<std::move(EBenergy_edm).get()->size()<<std::endl;
    iEvent.put(std::move(EBenergy_edm),"EBenergy");
- 
-   fillHBHE (iEvent, iSetup );
-   std::unique_ptr<e2e::Frame1D> HBHEenergy_edm (new e2e::Frame1D(vHBHE_energy_));
-   std::unique_ptr<e2e::Frame1D> HBHEenergyEB_edm (new e2e::Frame1D(vHBHE_energy_EB_));
-   std::cout<<" >> Size of HBHE Energy vector is: "<<std::move(HBHEenergy_edm).get()->size()<<std::endl;
-   std::cout<<" >> Size of EB HBHE Energy vector is: "<<std::move(HBHEenergyEB_edm).get()->size()<<std::endl;
-   iEvent.put(std::move(HBHEenergy_edm),"HBHEenergy");
-   iEvent.put(std::move(HBHEenergyEB_edm),"HBHEenergyEB");
-   
-   fillECALstitched (iEvent, iSetup);
-   std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
-   std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
-   iEvent.put(std::move(ECALstitched_energy_edm), "ECALstitchedenergy");
-
-   
-   fillTracksAtECALstitched (iEvent, iSetup );
-   std::unique_ptr<e2e::Frame1D> TracksECALstitchedPt_edm (new e2e::Frame1D(vECAL_tracksPt_));
-   std::cout<<" >> Size of Pt Tracks vector at Stitched ECAL is: "<<std::move(TracksECALstitchedPt_edm).get()->size()<<std::endl;
-   iEvent.put(std::move(TracksECALstitchedPt_edm), "TracksAtECALstitchedPt");
 	
-   for (unsigned int i=0;i<Nadjproj;i++)
-   {
-     fillTracksAtECALadjustable( iEvent, iSetup, i );
-     //fillTRKlayersAtECALadjustable( iEvent, iSetup, i );
-   }
-   std::cout<<" >> Number of TracksAtECALadjPt per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
-   std::cout<<" >> Number of TracksAtECALadj per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
-   std::cout<<" >> Number of TracksAtECALadjPtMax per event: "<<sizeof(vECALadj_tracksPt_max_)/sizeof(vECALadj_tracksPt_max_[0])<<std::endl;
-   std::cout<<" >> Sizes of TracksadjPt, Tracksadj and TracksadjPtMax are: "<<vECALadj_tracksPt_[0].size()<<", "<<vECALadj_tracks_[0].size()<<", "<<vECALadj_tracksPt_max_[0].size()<<std::endl;
-   std::unique_ptr<e2e::Frame1D> TracksECALadjPt_edm (new e2e::Frame1D(vECALadj_tracksPt_[0]));
-   std::cout<<" >> Size of Pt Tracks vector at ECAL adjustable is : "<<std::move(TracksECALadjPt_edm).get()->size()<<std::endl;
-   iEvent.put(std::move(TracksECALadjPt_edm),"TracksAtECALadjPt");
-   std::unique_ptr<e2e::Frame1D> TracksECALadj_edm (new e2e::Frame1D(vECALadj_tracks_[0]));
-   std::cout<<" >> Size of Track vector at ECAL adjustable is : "<<std::move(TracksECALadj_edm).get()->size()<<std::endl;
-   iEvent.put(std::move(TracksECALadj_edm),"TracksAtECALadj");
-   std::unique_ptr<e2e::Frame1D> TracksECALadjPt_max_edm (new e2e::Frame1D(vECALadj_tracksPt_max_[0]));
-   std::cout<<" >> Size of max Pt Track vector at ECAL adjustable is : "<<std::move(TracksECALadjPt_max_edm).get()->size()<<std::endl;
-   iEvent.put(std::move(TracksECALadjPt_max_edm),"TracksAtECALadjPtMax");
+   e2e::Frame2D vJetFrames;
  
+   if (doHBHEenergy){
+   	fillHBHE (iEvent, iSetup );
+   	std::unique_ptr<e2e::Frame1D> HBHEenergy_edm (new e2e::Frame1D(vHBHE_energy_));
+   	std::unique_ptr<e2e::Frame1D> HBHEenergyEB_edm (new e2e::Frame1D(vHBHE_energy_EB_));
+   	std::cout<<" >> Size of HBHE Energy vector is: "<<std::move(HBHEenergy_edm).get()->size()<<std::endl;
+   	std::cout<<" >> Size of EB HBHE Energy vector is: "<<std::move(HBHEenergyEB_edm).get()->size()<<std::endl;
+   	iEvent.put(std::move(HBHEenergy_edm),"HBHEenergy");
+   	iEvent.put(std::move(HBHEenergyEB_edm),"HBHEenergyEB");
+	vJetFrames.push_back(vHBHE_energy_);
+   }
+   
+   if (doECALstitched){
+	fillECALstitched (iEvent, iSetup);
+   	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
+   	std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
+   	iEvent.put(std::move(ECALstitched_energy_edm), "ECALstitchedenergy");
+   	vJetFrames.push_back(doECALstitched);
+   }
+
+   if (doTracksAtECALstitchedPt){
+   	fillTracksAtECALstitched (iEvent, iSetup );
+   	std::unique_ptr<e2e::Frame1D> TracksECALstitchedPt_edm (new e2e::Frame1D(vECAL_tracksPt_));
+   	std::cout<<" >> Size of Pt Tracks vector at Stitched ECAL is: "<<std::move(TracksECALstitchedPt_edm).get()->size()<<std::endl;
+   	iEvent.put(std::move(TracksECALstitchedPt_edm), "TracksAtECALstitchedPt");
+   	vJetFrames.push_back(vECAL_tracksPt_);
+   }
+
+   if (doTracksAtECALadjPt){
+   	for (unsigned int i=0;i<Nadjproj;i++)
+   	{
+     		fillTracksAtECALadjustable( iEvent, iSetup, i );
+     		//fillTRKlayersAtECALadjustable( iEvent, iSetup, i );
+   	}
+   	std::cout<<" >> Number of TracksAtECALadjPt per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
+   	std::cout<<" >> Number of TracksAtECALadj per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
+   	std::cout<<" >> Number of TracksAtECALadjPtMax per event: "<<sizeof(vECALadj_tracksPt_max_)/sizeof(vECALadj_tracksPt_max_[0])<<std::endl;
+   	std::cout<<" >> Sizes of TracksadjPt, Tracksadj and TracksadjPtMax are: "<<vECALadj_tracksPt_[0].size()<<", "<<vECALadj_tracks_[0].size()<<", "<<vECALadj_tracksPt_max_[0].size()<<std::endl;
+   	std::unique_ptr<e2e::Frame1D> TracksECALadjPt_edm (new e2e::Frame1D(vECALadj_tracksPt_[0]));
+   	std::cout<<" >> Size of Pt Tracks vector at ECAL adjustable is : "<<std::move(TracksECALadjPt_edm).get()->size()<<std::endl;
+   	iEvent.put(std::move(TracksECALadjPt_edm),"TracksAtECALadjPt");
+   	std::unique_ptr<e2e::Frame1D> TracksECALadj_edm (new e2e::Frame1D(vECALadj_tracks_[0]));
+   	std::cout<<" >> Size of Track vector at ECAL adjustable is : "<<std::move(TracksECALadj_edm).get()->size()<<std::endl;
+   	iEvent.put(std::move(TracksECALadj_edm),"TracksAtECALadj");
+   	std::unique_ptr<e2e::Frame1D> TracksECALadjPt_max_edm (new e2e::Frame1D(vECALadj_tracksPt_max_[0]));
+   	std::cout<<" >> Size of max Pt Track vector at ECAL adjustable is : "<<std::move(TracksECALadjPt_max_edm).get()->size()<<std::endl;
+   	iEvent.put(std::move(TracksECALadjPt_max_edm),"TracksAtECALadjPtMax");
+   	vJetFrames.push_back(vECALadj_tracksPt_);
+   }	
+	
    std::cout<<" >> Added EB, HBHE, HBHE_EB, ECALstitched, TracksAtECALstitchedPt and TracksAtECALadjPt to edm root file"<<std::endl;
    
    nPassed++;
