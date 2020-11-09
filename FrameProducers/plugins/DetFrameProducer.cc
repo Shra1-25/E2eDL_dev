@@ -139,7 +139,9 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	iEvent.put(std::move(TracksECALadjPt_max_edm),"TracksAtECALadjPtMax");
    	vJetFrames.push_back(vECALadj_tracksPt_);
    }	
-	
+   std::unique_ptr<e2e::Frame2D> vJetFrames_edm (new e2e::Frame1D(vJetFrames));
+   iEvent.put(std::move(vJetFrames_edm), "JetFrames");
+   
    std::cout<<" >> Added EB, HBHE, HBHE_EB, ECALstitched, TracksAtECALstitchedPt and TracksAtECALadjPt to edm root file"<<std::endl;
    
    nPassed++;
