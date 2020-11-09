@@ -52,14 +52,14 @@ DetFrameProducer::DetFrameProducer(const edm::ParameterSet& iConfig)
   doHBHEenergy = iConfig.getParameter<bool>("doHBHEenergy");
 	
   //produces<float>("photonClasses").setBranchAlias("PhotonClass");
- produces<e2e::Frame1D>("EBenergy");
- produces<e2e::Frame1D>("HBHEenergy");
- produces<e2e::Frame1D>("HBHEenergyEB");
- produces<e2e::Frame1D>("ECALstitchedenergy");
- produces<e2e::Frame1D>("TracksAtECALstitchedPt");
- produces<e2e::Frame1D>("TracksAtECALadjPt");
- produces<e2e::Frame1D>("TracksAtECALadj");
- produces<e2e::Frame1D>("TracksAtECALadjPtMax");
+  produces<e2e::Frame1D>("EBenergy");
+  produces<e2e::Frame1D>("HBHEenergy");
+  produces<e2e::Frame1D>("HBHEenergyEB");
+  produces<e2e::Frame1D>("ECALstitchedenergy");
+  produces<e2e::Frame1D>("TracksAtECALstitchedPt");
+  produces<e2e::Frame1D>("TracksAtECALadjPt");
+  produces<e2e::Frame1D>("TracksAtECALadj");
+  produces<e2e::Frame1D>("TracksAtECALadjPtMax");
 }
 
 DetFrameProducer::~DetFrameProducer()
