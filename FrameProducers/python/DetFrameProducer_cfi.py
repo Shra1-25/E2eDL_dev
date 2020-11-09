@@ -24,4 +24,8 @@ DetFrames = cms.EDProducer('DetFrameProducer'
     #granularity multiplier wrt ECAL maps for tracker and tracking RH images
     , granularityMultiPhi = cms.int32(1)
     , granularityMultiEta = cms.int32(1)
+    , doECALstitched = cms.bool(True)
+    , doTracksAtECALstitchedPt = cms.bool(True)
+    , doTracksAtECALadjPt = cms.bool(True)
+    , doHBHEenergy = cms.bool(True)
     )
