@@ -20,25 +20,25 @@ options.register('doEBenergy',
     info = "set doEBenergy")
 # Set doECALstitched to 1 to produce JetSeeds and JetFrames.
 options.register('doECALstitched',
-    default=False,
+    default=True,
     mult=VarParsing.VarParsing.multiplicity.singleton,
     mytype=VarParsing.VarParsing.varType.bool,
     info = "set doECALstitched")
 # Set doTracksAtECALstitchedPt to 1 to produce JetSeeds and JetFrames.
 options.register('doTracksAtECALstitchedPt',
-    default=False,
+    default=True,
     mult=VarParsing.VarParsing.multiplicity.singleton,
     mytype=VarParsing.VarParsing.varType.bool,
     info = "set doTracksAtECALstitchedPt")
 # Set doTracksAtECALadjPt to 1 to produce JetSeeds and JetFrames.
 options.register('doTracksAtECALadjPt',
-    default=False,
+    default=True,
     mult=VarParsing.VarParsing.multiplicity.singleton,
     mytype=VarParsing.VarParsing.varType.bool,
     info = "set doTracksAtECALadjPt")
 # Set doHBHEenergy to 1 to produce JetSeeds and JetFrames.
 options.register('doHBHEenergy',
-    default=False,
+    default=True,
     mult=VarParsing.VarParsing.multiplicity.singleton,
     mytype=VarParsing.VarParsing.varType.bool,
     info = "set doHBHEenergy")
