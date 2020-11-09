@@ -78,6 +78,15 @@ process.load("E2eDL.TopTagger.TopTagger_cfi")
 process.JetFrames.jetCollection = cms.string("ak8")
 process.JetFrames.minJetPt = cms.double(35.)
 process.JetFrames.maxJetEta = cms.double(2.4)
+process.JetFrames.doHBHEenergy = options.doHBHEenergy
+process.JetFrames.doECALstitched = options.doECALstitched
+process.JetFrames.doTracksAtECALstitchedPt = options.doTracksAtECALstitchedPt
+process.JetFrames.doTracksAtECALadjPt = options.doTracksAtECALadjPt
+
+process.DetFrames.doHBHEenergy = options.doHBHEenergy
+process.DetFrames.doECALstitched = options.doECALstitched
+process.DetFrames.doTracksAtECALstitchedPt = options.doTracksAtECALstitchedPt
+process.DetFrames.doTracksAtECALadjPt = options.doTracksAtECALadjPt
 
 process.out = cms.OutputModule("PoolOutputModule",
     fileName = cms.untracked.string('TopPt+TopFrames.root') 
