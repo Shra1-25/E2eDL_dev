@@ -103,10 +103,7 @@ class JetFrameProducer : public edm::stream::EDProducer<> {
       edm::EDGetTokenT<PhotonCollection> photonCollectionT_;
       edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_;
       edm::EDGetTokenT<HBHERecHitCollection> HBHERecHitCollectionT_;
-      edm::EDGetTokenT<e2e::Frame1D> ECALstitched_energy_token;
-      edm::EDGetTokenT<e2e::Frame1D> TracksAtECALstitchedPt_token;
-      edm::EDGetTokenT<e2e::Frame1D> TracksAtECALadjPt_token;
-      edm::EDGetTokenT<e2e::Frame1D> HBHEenergy_token;
+      edm::EDGetTokenT<e2e::Frame2D> vDetFramesT_;
       edm::EDGetTokenT<reco::VertexCollection> vertexCollectionT_;
       edm::EDGetTokenT<reco::PFJetCollection> jetCollectionT_;
       edm::EDGetTokenT<reco::GenParticleCollection> genParticleCollectionT_;
