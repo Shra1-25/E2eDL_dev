@@ -110,6 +110,15 @@ if options.jetCollection == 'ak4':
 elif options.jetCollection == 'ak8':
     process.JetFrames.minJetPt = cms.double(400.)
     process.JetFrames.maxJetEta = cms.double(1.37)
+process.JetFrames.doHBHEenergy = options.doHBHEenergy
+process.JetFrames.doECALstitched = options.doECALstitched
+process.JetFrames.doTracksAtECALstitchedPt = options.doTracksAtECALstitchedPt
+process.JetFrames.doTracksAtECALadjPt = options.doTracksAtECALadjPt
+
+process.DetFrames.doHBHEenergy = options.doHBHEenergy
+process.DetFrames.doECALstitched = options.doECALstitched
+process.DetFrames.doTracksAtECALstitchedPt = options.doTracksAtECALstitchedPt
+process.DetFrames.doTracksAtECALadjPt = options.doTracksAtECALadjPt
 
 #process.out = cms.OutputModule("PoolOutputModule",
 #    fileName = cms.untracked.string('myOutputFile.root')
