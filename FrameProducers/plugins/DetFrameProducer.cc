@@ -56,7 +56,7 @@ DetFrameProducer::DetFrameProducer(const edm::ParameterSet& iConfig)
   produces<e2e::Frame1D>("HBHEenergyEB");
   produces<e2e::Frame1D>("TracksAtECALadj");
   produces<e2e::Frame1D>("TracksAtECALadjPtMax");
-  produces<e2e::Frame2D>("DetFrames");
+  produces<e2e::Frame3D>("DetFrames");
 }
 
 DetFrameProducer::~DetFrameProducer()
@@ -86,11 +86,15 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    std::cout<<" >> Size of EB Energy vector is: "<<std::move(EBenergy_edm).get()->size()<<std::endl;
    iEvent.put(std::move(EBenergy_edm),"EBenergy");
 	
-   e2e::Frame2D vDetFrames;
+   e2e::Frame3D vDetFrames;
  
    if (doHBHEenergy){
    	fillHBHE (iEvent, iSetup );
-   	std::unique_ptr<e2e::Frame1D> HBHEenergy_edm (new e2e::Frame1D(vHBHE_energy_));
+	// reshape detector image arrays to 280x360
+	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+		vHBHE_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vHBHE_energy_[idx];
+	}
+   	std::unique_ptr<e2e::Frame2D> HBHEenergy_edm (new e2e::Frame2D(vHBHE_energy_reshaped));
    	std::unique_ptr<e2e::Frame1D> HBHEenergyEB_edm (new e2e::Frame1D(vHBHE_energy_EB_));
    	std::cout<<" >> Size of HBHE Energy vector is: "<<std::move(HBHEenergy_edm).get()->size()<<std::endl;
    	std::cout<<" >> Size of EB HBHE Energy vector is: "<<std::move(HBHEenergyEB_edm).get()->size()<<std::endl;
@@ -101,6 +105,10 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    
    if (doECALstitched){
 	fillECALstitched (iEvent, iSetup);
+	// reshape detector image arrays to 280x360
+	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECAL_energy_[idx];
+	}
    	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
    	std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(ECALstitched_energy_edm), "ECALstitchedenergy");
@@ -109,6 +117,10 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
    if (doTracksAtECALstitchedPt){
    	fillTracksAtECALstitched (iEvent, iSetup );
+	// reshape detector image arrays to 280x360
+	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+		vECAL_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECAL_tracksPt_[idx];
+	}
    	std::unique_ptr<e2e::Frame1D> TracksECALstitchedPt_edm (new e2e::Frame1D(vECAL_tracksPt_));
    	std::cout<<" >> Size of Pt Tracks vector at Stitched ECAL is: "<<std::move(TracksECALstitchedPt_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(TracksECALstitchedPt_edm), "TracksAtECALstitchedPt");
@@ -121,6 +133,10 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
      		fillTracksAtECALadjustable( iEvent, iSetup, i );
      		//fillTRKlayersAtECALadjustable( iEvent, iSetup, i );
    	}
+	// reshape detector image arrays to 280x360
+	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+		vECALadj_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECALadj_tracksPt_[0][idx];
+	}
    	std::cout<<" >> Number of TracksAtECALadjPt per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
    	std::cout<<" >> Number of TracksAtECALadj per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
    	std::cout<<" >> Number of TracksAtECALadjPtMax per event: "<<sizeof(vECALadj_tracksPt_max_)/sizeof(vECALadj_tracksPt_max_[0])<<std::endl;
