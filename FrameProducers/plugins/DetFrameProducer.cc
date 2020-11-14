@@ -87,6 +87,10 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    iEvent.put(std::move(EBenergy_edm),"EBenergy");
 	
    e2e::Frame3D vDetFrames;
+   e2e::Frame2D vHBHE_energy_reshaped (nDetFrameH, e2e::Frame1D (nDetFrameW,0.));
+   e2e::Frame2D vECAL_energy_reshaped (nDetFrameH, e2e::Frame1D (nDetFrameW,0.));
+   e2e::Frame2D vECAL_tracksPt_reshaped (nDetFrameH, e2e::Frame1D (nDetFrameW,0.));
+   e2e::Frame2D vECALadj_tracksPt_reshaped (nDetFrameH, e2e::Frame1D (nDetFrameW,0.));
  
    if (doHBHEenergy){
    	fillHBHE (iEvent, iSetup );
