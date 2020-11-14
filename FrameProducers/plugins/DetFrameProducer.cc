@@ -104,7 +104,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	std::cout<<" >> Size of EB HBHE Energy vector is: "<<std::move(HBHEenergyEB_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(HBHEenergy_edm),"HBHEenergy");
    	//iEvent.put(std::move(HBHEenergyEB_edm),"HBHEenergyEB");
-	vDetFrames.push_back(vHBHE_energy_);
+	vDetFrames.push_back(vHBHE_energy_reshaped);
    }
    
    if (doECALstitched){
@@ -116,7 +116,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
    	std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(ECALstitched_energy_edm), "ECALstitchedenergy");
-   	vDetFrames.push_back(vECAL_energy_);
+   	vDetFrames.push_back(vECAL_energy_reshaped);
    }
 
    if (doTracksAtECALstitchedPt){
@@ -128,7 +128,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	std::unique_ptr<e2e::Frame1D> TracksECALstitchedPt_edm (new e2e::Frame1D(vECAL_tracksPt_));
    	std::cout<<" >> Size of Pt Tracks vector at Stitched ECAL is: "<<std::move(TracksECALstitchedPt_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(TracksECALstitchedPt_edm), "TracksAtECALstitchedPt");
-   	vDetFrames.push_back(vECAL_tracksPt_);
+   	vDetFrames.push_back(vECAL_tracksPt_reshaped);
    }
 
    if (doTracksAtECALadjPt){
@@ -154,7 +154,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	std::unique_ptr<e2e::Frame1D> TracksECALadjPt_max_edm (new e2e::Frame1D(vECALadj_tracksPt_max_[0]));
    	std::cout<<" >> Size of max Pt Track vector at ECAL adjustable is : "<<std::move(TracksECALadjPt_max_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(TracksECALadjPt_max_edm),"TracksAtECALadjPtMax");
-   	vDetFrames.push_back(vECALadj_tracksPt_[0]);
+   	vDetFrames.push_back(vECALadj_tracksPt_reshaped);
    }	
    std::unique_ptr<e2e::Frame2D> vDetFrames_edm (new e2e::Frame2D(vDetFrames));
    iEvent.put(std::move(vDetFrames_edm), "DetFrames");
