@@ -96,7 +96,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	fillHBHE (iEvent, iSetup );
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vHBHE_energy_.size(); idx++){
-		vHBHE_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vHBHE_energy_[idx];
+		vHBHE_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vHBHE_energy_[idx];
 	}
    	std::unique_ptr<e2e::Frame2D> HBHEenergy_edm (new e2e::Frame2D(vHBHE_energy_reshaped));
    	std::unique_ptr<e2e::Frame1D> HBHEenergyEB_edm (new e2e::Frame1D(vHBHE_energy_EB_));
@@ -111,7 +111,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	fillECALstitched (iEvent, iSetup);
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vECAL_energy_.size(); idx++){
-		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECAL_energy_[idx];
+		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECAL_energy_[idx];
 	}
    	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
    	std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
@@ -123,7 +123,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	fillTracksAtECALstitched (iEvent, iSetup );
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vECAL_tracksPt_.size(); idx++){
-		vECAL_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECAL_tracksPt_[idx];
+		vECAL_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECAL_tracksPt_[idx];
 	}
    	std::unique_ptr<e2e::Frame1D> TracksECALstitchedPt_edm (new e2e::Frame1D(vECAL_tracksPt_));
    	std::cout<<" >> Size of Pt Tracks vector at Stitched ECAL is: "<<std::move(TracksECALstitchedPt_edm).get()->size()<<std::endl;
@@ -139,7 +139,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    	}
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vECALadj_tracksPt_[0].size(); idx++){
-		vECALadj_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECALadj_tracksPt_[0][idx];
+		vECALadj_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECALadj_tracksPt_[0][idx];
 	}
    	std::cout<<" >> Number of TracksAtECALadjPt per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
    	std::cout<<" >> Number of TracksAtECALadj per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
