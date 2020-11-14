@@ -1,7 +1,7 @@
 #include "E2eDL/FrameProducers/interface/FrameCropping.h"
 
 // Cropping frames with given width and height: frame_width, frame_height
-void e2e::getFrame ( e2e::Frame2D& vframe, const e2e::seed& objSeed, const e2e::Frame1D* vdetector_image,
+void e2e::getFrame ( e2e::Frame2D& vframe, const e2e::seed& objSeed, const e2e::Frame2D* vdetector_image,
   int detImg_height, int detImg_width ) // can be removed if using Frame2D input
 {
 
@@ -60,7 +60,7 @@ void e2e::getFrame ( e2e::Frame2D& vframe, const e2e::seed& objSeed, const e2e::
   // Cropping the flat input vector based on the above determined start and end indices
   for (int x_idx = start_x; x_idx<=end_x;x_idx++){
    for (int y_idx = 0/*start_y*/; y_idx<frame_width/*=end_y*/;y_idx++){
-    vframe[x_idx-start_x+buff_x][y_idx/*y_idx-start_y+buff_y*/] = (*vdetector_image)[x_idx*detImg_width+(y_idx+buff_y+start_y)%detImg_width];
+    vframe[x_idx-start_x+buff_x][y_idx/*y_idx-start_y+buff_y*/] = (*vdetector_image)[x_idx][(y_idx+buff_y+start_y)];
     //vEB_flat_frame[(x_idx-start_x+buff_x)*frame_width+y_idx/*-start_y+buff_y*/]=vdetector_image[x_idx*detImg_width+(y_idx+start_y+buff_y)%detImg_width];
     //std::cout<<"("<<x_idx-start_x+buff_x<<","<<y_idx<<"): "<<vframe[x_idx-start_x+buff_x][y_idx/*y_idx-start_y+buff_y*/]<<" "<<vdetector_image[x_idx*detImg_width+(y_idx+start_y+buff_y)%detImg_width];
    }
