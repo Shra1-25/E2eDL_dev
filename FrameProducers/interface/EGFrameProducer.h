@@ -40,6 +40,8 @@ static const float defaultVal = -1.;        // default value to fill for invalid
 static const unsigned int nSeedCoords = 2;  // no. of elements to specify frame seed coordinates
 const unsigned int nFrameH = 32;            // frame height in no. of pixels
 const unsigned int nFrameW = 32;            // frame width in no. of pixel
+const unsigned int nDetEBenergyH = 170;     // detector image height in no. of pixels
+const unsigned int nDetEBenergyW = 360;     // detector image width in no. of pixels
 
 class EGFrameProducer : public edm::stream::EDProducer<> {
 
