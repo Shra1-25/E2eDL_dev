@@ -66,7 +66,7 @@ EGFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
     for (unsigned int idx=0; idx<EBenergyDet.size(); idx++){
       EBenergy_reshaped[int(idx/nDetEBenergyW)][idx%nDetEBenergyW] = EBenergyDet[idx];
     }
-    if ( doEBenergy ) e2e::getFrame( vPhoFrames[iP][0], vPhoSeeds[iP], EBenergy_reshaped/*hEBenergy.product()*/,
+    if ( doEBenergy ) e2e::getFrame( vPhoFrames[iP][0], vPhoSeeds[iP], &EBenergy_reshaped/*hEBenergy.product()*/,
                                      2*EBDetId::MAX_IETA, EBDetId::MAX_IPHI );// can be removed if input is Frame2D
     edm::LogInfo("EGFrameProducer") << " >> vPhoFrames[iP][0][15][15]:" << vPhoFrames[iP][0][15][15];
 
