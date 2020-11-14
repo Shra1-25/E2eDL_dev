@@ -2,7 +2,7 @@
 
 // Striding input frames (vDetFrame by rowstrides and colstrides accordingly)
 e2e::Frame1D frameStriding(e2e::Frame2D& vDetFrame, int rows, int columns, int rowstrides, int colstrides){
-  e2e::Frame2D vStridedFrame ((rows*rowstrides),((columns*colstrides),0));
+  e2e::Frame2D vStridedFrame ((rows*rowstrides),e2e::Frame1D((columns*colstrides),0));
   for (int rowidx=0; rowidx<rows; rowidx++){
     for (int colidx=0; colidx<columns; colidx++){
       for (int kernelrow=0; kernelrow<rowstrides; kernelrow++){
