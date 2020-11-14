@@ -5,7 +5,7 @@ JetFrameProducer::JetFrameProducer(const edm::ParameterSet& iConfig)
   photonCollectionT_ = consumes<PhotonCollection>(iConfig.getParameter<edm::InputTag>("photonCollection"));
   EBRecHitCollectionT_    = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("reducedEBRecHitCollection"));
   HBHERecHitCollectionT_  = consumes<HBHERecHitCollection>(iConfig.getParameter<edm::InputTag>("reducedHBHERecHitCollection"));
-  vDetFramesT_ = consumes<e2e::Frame2D>(iConfig.getParameter<edm::InputTag>("DetFrames"));
+  vDetFramesT_ = consumes<e2e::Frame3D>(iConfig.getParameter<edm::InputTag>("DetFrames"));
   vertexCollectionT_       = consumes<reco::VertexCollection>(iConfig.getParameter<edm::InputTag>("vertexCollection"));
   
   TRKRecHitCollectionT_   = consumes<TrackingRecHitCollection>(iConfig.getParameter<edm::InputTag>("trackRecHitCollection"));
@@ -85,9 +85,9 @@ JetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    }
    std::cout<<std::endl;
    
-   edm::Handle<e2e::Frame2D> vDetFrames_handle;
+   edm::Handle<e2e::Frame3D> vDetFrames_handle;
    iEvent.getByToken(vDetFramesT_, vDetFrames_handle);
-   e2e::Frame2D vDetFrames = *vDetFrames_handle;
+   e2e::Frame3D vDetFrames = *vDetFrames_handle;
   
    //Performing Striding on HBHE Frames.
    if(doHBHEenergy) vDetFrames[0] = frameStriding(vDetFrames[0], int(nDetImgH/nStrideH), int(nDetImgW/nStrideW), nStrideH, nStrideW);
