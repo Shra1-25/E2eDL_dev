@@ -91,7 +91,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    if (doHBHEenergy){
    	fillHBHE (iEvent, iSetup );
 	// reshape detector image arrays to 280x360
-	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+	for (unsigned int idx=0; idx<vHBHE_energy.size(); idx++){
 		vHBHE_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vHBHE_energy_[idx];
 	}
    	std::unique_ptr<e2e::Frame2D> HBHEenergy_edm (new e2e::Frame2D(vHBHE_energy_reshaped));
@@ -106,7 +106,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    if (doECALstitched){
 	fillECALstitched (iEvent, iSetup);
 	// reshape detector image arrays to 280x360
-	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+	for (unsigned int idx=0; idx<vHBHE_energy.size(); idx++){
 		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECAL_energy_[idx];
 	}
    	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
@@ -118,7 +118,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    if (doTracksAtECALstitchedPt){
    	fillTracksAtECALstitched (iEvent, iSetup );
 	// reshape detector image arrays to 280x360
-	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+	for (unsigned int idx=0; idx<vHBHE_energy.size(); idx++){
 		vECAL_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECAL_tracksPt_[idx];
 	}
    	std::unique_ptr<e2e::Frame1D> TracksECALstitchedPt_edm (new e2e::Frame1D(vECAL_tracksPt_));
@@ -134,7 +134,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
      		//fillTRKlayersAtECALadjustable( iEvent, iSetup, i );
    	}
 	// reshape detector image arrays to 280x360
-	for (int idx=0; idx<vHBHE_energy.size(); idx++){
+	for (unsigned int idx=0; idx<vHBHE_energy.size(); idx++){
 		vECALadj_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECALadj_tracksPt_[0][idx];
 	}
    	std::cout<<" >> Number of TracksAtECALadjPt per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
