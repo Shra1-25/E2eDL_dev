@@ -98,7 +98,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 	for (unsigned int idx=0; idx<vHBHE_energy_.size(); idx++){
 		vHBHE_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vHBHE_energy_[idx];
 	}
-   	std::unique_ptr<e2e::Frame2D> HBHEenergy_edm (new e2e::Frame2D(vHBHE_energy_reshaped));
+   	std::unique_ptr<e2e::Frame1D> HBHEenergy_edm (new e2e::Frame1D(vHBHE_energy_));
    	std::unique_ptr<e2e::Frame1D> HBHEenergyEB_edm (new e2e::Frame1D(vHBHE_energy_EB_));
    	std::cout<<" >> Size of HBHE Energy vector is: "<<std::move(HBHEenergy_edm).get()->size()<<std::endl;
    	std::cout<<" >> Size of EB HBHE Energy vector is: "<<std::move(HBHEenergyEB_edm).get()->size()<<std::endl;
