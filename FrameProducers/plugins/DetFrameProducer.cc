@@ -138,7 +138,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
      		//fillTRKlayersAtECALadjustable( iEvent, iSetup, i );
    	}
 	// reshape detector image arrays to 280x360
-	for (unsigned int idx=0; idx<vECALadj_tracksPt_.size(); idx++){
+	for (unsigned int idx=0; idx<vECALadj_tracksPt_[0].size(); idx++){
 		vECALadj_tracksPt_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH]=vECALadj_tracksPt_[0][idx];
 	}
    	std::cout<<" >> Number of TracksAtECALadjPt per event: "<<sizeof(vECALadj_tracksPt_)/sizeof(vECALadj_tracksPt_[0])<<std::endl;
