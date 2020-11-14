@@ -69,6 +69,8 @@ class EGFrameProducer : public edm::stream::EDProducer<> {
       edm::Handle<EcalRecHitCollection> hEBRecHits;
       edm::Handle<e2e::Frame1D>         hEBenergy;
 
+      e2e::Frame2D EBenergy_reshaped;
+   
       // Detector image switches
       bool doEBenergy;
 
