@@ -61,7 +61,12 @@ EGFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
 
     // Crop frame of size nFrameH*nFrameW for each detector image: store ouput in `vPhoFrames[iP]`
     // Each detector frame from iD=[0, nFrameD) should be stored in `vPhoFrames[iP][iD]`
-    if ( doEBenergy ) e2e::getFrame( vPhoFrames[iP][0], vPhoSeeds[iP], hEBenergy.product(),
+    EBenergyDet = *hEBenergy;
+    e2e::Frame2D EBenergy_reshaped (nDetEBenergyH, e2e::Frame1D(nDetEBenergyW, 0.));
+    for (unsigned int idx=0; idx<EBenergyDet.size(); idx++){
+      EBenergy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameH] = EBenergyDet[idx];
+    }
+    if ( doEBenergy ) e2e::getFrame( vPhoFrames[iP][0], vPhoSeeds[iP], EBenergy_reshaped/*hEBenergy.product()*/,
                                      2*EBDetId::MAX_IETA, EBDetId::MAX_IPHI );// can be removed if input is Frame2D
     edm::LogInfo("EGFrameProducer") << " >> vPhoFrames[iP][0][15][15]:" << vPhoFrames[iP][0][15][15];
 
