@@ -45,8 +45,8 @@ void fillECAL_with_EEproj ( std::vector<float>& vECAL_energy_, TH2F *hEvt_EE_ene
 } // fillECAL_with_EEproj
 
 // Fill stitched EE-, EB, EE+ rechits ________________________________________________________//
-void fillECALstitched ( edm::Handle<EcalRecHitCollection> EBRecHitsH_, edm::Handle<EcalRecHitCollection> EERecHitsH_, edm::ESHandle<CaloGeometry> caloGeomH_ ) {
-
+e2e::Frame1D fillECALstitched ( edm::Handle<EcalRecHitCollection> EBRecHitsH_, edm::Handle<EcalRecHitCollection> EERecHitsH_, edm::ESHandle<CaloGeometry> caloGeomH_ ) {
+  e2e::Frame1D vECAL_energy_;
   // Intermediate helper histogram (single event only)
   hEvt_EE_energy[0] = new TH2F("evt_EEm_energy", "E(i#phi,i#eta);i#phi;i#eta",
       EB_IPHI_MAX, -TMath::Pi(), TMath::Pi(),
@@ -114,5 +114,5 @@ void fillECALstitched ( edm::Handle<EcalRecHitCollection> EBRecHitsH_, edm::Hand
   ieta_global_offset = ECAL_IETA_MAX_EXT + EB_IETA_MAX;
   
   fillECAL_with_EEproj( vECAL_energy_, hEvt_EE_energy[1], ieta_global_offset);
-
+return vECAL_energy_;
 } // fillECALstitched()
