@@ -72,7 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
-#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+//#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 namespace e2e {
   e2e::Frame1D fillECALstitched   ( edm::Handle<EcalRecHitCollection> EBRecHitsH_, edm::Handle<EcalRecHitCollection> EERecHitsH_, edm::ESHandle<CaloGeometry> caloGeomH_ );
