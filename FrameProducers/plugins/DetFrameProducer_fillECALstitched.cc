@@ -1,4 +1,4 @@
-#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+/*#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 // Fill stitched EEm_EB_EEp image /////////////////////............/
 // Store all ECAL event rechits into a stitched EEm_EB_EEp image 
@@ -115,4 +115,4 @@ void DetFrameProducer::fillECALstitched ( const edm::Event& iEvent, const edm::E
   
   fillECAL_with_EEproj( vECAL_energy_, hEvt_EE_energy[1], ieta_global_offset);
 
-} // fillECALstitched()
+} // fillECALstitched()*/
