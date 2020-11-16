@@ -1,4 +1,4 @@
-#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+#include "E2eDL/FrameProducers/interface/fillECALstitched.h"
 
 // Fill stitched EEm_EB_EEp image /////////////////////............/
 // Store all ECAL event rechits into a stitched EEm_EB_EEp image 
