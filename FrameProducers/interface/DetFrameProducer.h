@@ -72,7 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
-#include "E2eDL/FrameProducers/interface/fillECALstitched.h
+#include "E2eDL/FrameProducers/interface/fillECALstitched.h"
 
 using namespace std;
 /*using pat::PhotonCollection;
