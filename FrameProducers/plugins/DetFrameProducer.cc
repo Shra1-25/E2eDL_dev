@@ -114,7 +114,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   	iEvent.getByToken( EERecHitCollectionT_, EERecHitsH_ );
   	edm::ESHandle<CaloGeometry> caloGeomH_;
   	iSetup.get<CaloGeometryRecord>().get( caloGeomH_ );
-	fillECALstitched (EBRecHitsH_, EERecHitsH_, caloGeomH_);
+	vECALstitched_energy_ = fillECALstitched (EBRecHitsH_, EERecHitsH_, caloGeomH_);
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vECAL_energy_.size(); idx++){
 		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECAL_energy_[idx];
