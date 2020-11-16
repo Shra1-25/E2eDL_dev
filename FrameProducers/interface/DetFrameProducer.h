@@ -72,6 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
+#include "E2eDL/FrameProducers/interface/fillECALstitched.h
 
 using namespace std;
 /*using pat::PhotonCollection;
@@ -154,7 +155,7 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       
       void fillEB             ( const edm::Event&, const edm::EventSetup& );
       void fillHBHE           ( const edm::Event&, const edm::EventSetup& );
-      void fillECALstitched   ( const edm::Event&, const edm::EventSetup& );
+      //void fillECALstitched   ( const edm::Event&, const edm::EventSetup& );
       void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
       void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
       
