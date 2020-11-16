@@ -3,6 +3,6 @@
 #include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 namespace e2e {
-  void fillECALstitched   ( const edm::Event&, const edm::EventSetup& );
+  void fillECALstitched   ( edm::Handle<EcalRecHitCollection> EBRecHitsH_, edm::Handle<EcalRecHitCollection> EERecHitsH_, edm::ESHandle<CaloGeometry> caloGeomH_ );
 }
 #endif
