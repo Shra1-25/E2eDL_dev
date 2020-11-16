@@ -27,7 +27,6 @@
 <use name="SimDataFormats/GeneratorProducts"/>
 <use name="Calibration/IsolatedParticles"/>
 <use name="DQM/HcalCommon"/>
-<flags EDM_PLUGIN="1"/>
 <export>
   <lib name="1"/>
 </export>
