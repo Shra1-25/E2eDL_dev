@@ -84,7 +84,7 @@ using reco::PhotonRef;
 
 static const unsigned int Nproj = 5;
 //static const unsigned int Nadjproj = 2;
-#define Nadjproj 2;
+#define Nadjproj 2
 static const unsigned int Nhitproj = 2;
 static const unsigned int nDetFrameH = 280;
 static const unsigned int nDetFrameW = 360;
