@@ -73,9 +73,9 @@
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
-extern const unsigned int Nadjproj;
-std::vector<unsigned int> granularityMultiPhi[Nadjproj];
-std::vector<unsigned int> granularityMultiEta[Nadjproj];
+extern static const unsigned int Nadjproj;
+unsigned int granularityMultiPhi[Nadjproj];
+unsigned int granularityMultiEta[Nadjproj];
       
 int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
 int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
