@@ -149,7 +149,7 @@ void e2e::fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const f
 }
 
 // Fill adjustable EE-, EB, EE+ rechits ________________________________________________________//
-void e2e::fillTracksAtECALadjustable ( const edm::Event& iEvent, const edm::EventSetup& iSetup, unsigned int proj, edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_, edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_,  edm::EDGetTokenT<reco::TrackCollection> trackCollectionT_, e2e::Frame1D* vECALadj_tracksPt_, e2e::Frame1D* vECALadj_tracks_, e2e::Frame1D* vECALadj_tracksPt_max_) {
+void e2e::fillTracksAtECALadjustable ( const edm::Event& iEvent, const edm::EventSetup& iSetup, unsigned int proj, edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_, edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_,  edm::EDGetTokenT<reco::TrackCollection> trackCollectionT_, e2e::Frame1D vECALadj_tracksPt_, e2e::Frame1D vECALadj_tracks_, e2e::Frame1D vECALadj_tracksPt_max_) {
     
   for (unsigned int proj=0; proj<Nadjproj; proj++)
     {
