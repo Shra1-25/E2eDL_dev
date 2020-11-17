@@ -138,10 +138,10 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       e2e::Frame2D vECAL_energy_reshaped; 
       e2e::Frame1D vECAL_tracksPt_;
       e2e::Frame2D vECAL_tracksPt_reshaped;
-      e2e::Frame1D vECALadj_tracksPt_[Nadjproj];
+      e2e::Frame2D vECALadj_tracksPt_[Nadjproj];
       e2e::Frame2D vECALadj_tracksPt_reshaped;
-      e2e::Frame1D vECALadj_tracks_[Nadjproj];
-      e2e::Frame1D vECALadj_tracksPt_max_[Nadjproj];
+      e2e::Frame2D vECALadj_tracks_[Nadjproj];
+      e2e::Frame2D vECALadj_tracksPt_max_[Nadjproj];
       
       unsigned int nPho;
       
