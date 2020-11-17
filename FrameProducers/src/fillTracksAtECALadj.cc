@@ -1,5 +1,5 @@
 
-#include "E2eDL/FrameProducers/interface/TracksAtECALstitched.h"
+#include "E2eDL/FrameProducers/interface/TracksAtECALadj.h"
 
 TH2F *hEvt_Adj_tracks[Nadjproj];
 TH2F *hEvt_Adj_tracksPt[Nadjproj];
