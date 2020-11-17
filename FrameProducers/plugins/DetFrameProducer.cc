@@ -108,7 +108,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    }
    
    if (doECALstitched){
-	e2e::fillECALstitched (iEvent, iSetup, vECAL_energy_ );
+	e2e::fillECALstitched (iEvent, iSetup, EBRecHitCollectionT_, EERecHitCollectionT_, vECAL_energy_ );
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vECAL_energy_.size(); idx++){
 		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECAL_energy_[idx];
