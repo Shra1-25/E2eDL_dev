@@ -72,7 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
-#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+//#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 namespace e2e {
   void fillECALstitched ( const edm::Event&, const edm::EventSetup&, edm::EDGetTokenT<EcalRecHitCollection>, edm::EDGetTokenT<EcalRecHitCollection>, e2e::Frame1D );
