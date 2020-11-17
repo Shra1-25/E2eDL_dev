@@ -72,6 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
+#include "E2eDL/FrameProducers/interface/constants.h"
 //#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 static const int nEE = 2;
 static const float zs = 0.;
