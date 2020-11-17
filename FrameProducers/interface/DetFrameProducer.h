@@ -86,6 +86,9 @@ static const unsigned int Nadjproj = 2;
 static const unsigned int nDetFrameH = 280;
 static const unsigned int nDetFrameW = 360;
 
+edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
+edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
+
 class DetFrameProducer : public edm::stream::EDProducer<> {
    public:
       
@@ -93,8 +96,6 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       ~DetFrameProducer();
       
       static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
-      edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
-      edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
 
    private:
       virtual void beginStream(edm::StreamID) override;
