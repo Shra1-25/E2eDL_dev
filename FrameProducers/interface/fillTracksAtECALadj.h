@@ -72,6 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
+#include "E2eDL/FrameProducers/interface/constants.h"
 
 static const unsigned int Nadjproj = 2;
 static const std::string adj_projections[Nadjproj] = {"_5x5", "_3x3"};
