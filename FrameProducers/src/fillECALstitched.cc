@@ -114,5 +114,5 @@ void e2e::fillECALstitched ( const edm::Event& iEvent, const edm::EventSetup& iS
   ieta_global_offset = ECAL_IETA_MAX_EXT + EB_IETA_MAX;
   
   fillECAL_with_EEproj( vECAL_energy_, hEvt_EE_energy[1], ieta_global_offset);
-  return vECAL_energy_;
+  return;
 } // fillECALstitched()
