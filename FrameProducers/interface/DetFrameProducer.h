@@ -74,7 +74,7 @@
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/fillECALstitched.h"
 #include "E2eDL/FrameProducers/interface/fillHBHE.h"
-#include "E2eDL/FrameProducers/interface/fillTracksAtECALstitched.h"
+#include "E2eDL/FrameProducers/interface/fillTracksAtECALadj.h"
 
 using namespace std;
 /*using pat::PhotonCollection;
