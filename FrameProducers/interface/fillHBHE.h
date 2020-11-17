@@ -1,95 +1,80 @@
-#include "E2eDL/FrameProducers/interface/fillHBHE.h"
+#ifndef RecoE2E_fillECALstitched_h
+#define RecoE2E_fillECALstitched_h
 
-TH2F *hEvt_HBHE_energy;
+#include <memory>
+#include <vector>
 
-// Fill HBHE rechits _________________________________________________________________//
-void DetFrameProducer::fillHBHE ( const edm::Event& iEvent, const edm::EventSetup& iSetup, edm::EDGetTokenT<HBHERecHitCollection> HBHERecHitCollectionT_, e2e::Frame1D vHBHE_energy_, e2e::Frame1D vHBHE_energy_EB_ ) {
+#include "FWCore/Framework/interface/Frameworkfwd.h"
+#include "FWCore/Framework/interface/stream/EDProducer.h"
+#include "FWCore/Framework/interface/one/EDAnalyzer.h"
 
-  // Intermediate helper histogram (single event only)
-  hEvt_HBHE_energy = new TH2F("evt_HBHE_energy", "E(i#phi,i#eta);i#phi;i#eta",
-      HBHE_IPHI_NUM,           HBHE_IPHI_MIN-1,    HBHE_IPHI_MAX,
-      2*(HBHE_IETA_MAX_HE-1),-(HBHE_IETA_MAX_HE-1),HBHE_IETA_MAX_HE-1 );
-  
-  int iphi_, ieta_, ietaAbs_, idx_;
-  float energy_;
-  //float eta, GlobalPoint pos;
+#include "DataFormats/EcalRecHit/interface/EcalRecHitCollections.h"
+#include "DataFormats/EcalDigi/interface/EcalDigiCollections.h"
+#include "DataFormats/EcalDetId/interface/EBDetId.h"
+#include "DataFormats/EcalDetId/interface/EEDetId.h"
+#include "DataFormats/EcalDetId/interface/ESDetId.h"
+#include "DataFormats/SiPixelDetId/interface/PXBDetId.h"
+#include "DataFormats/SiPixelDetId/interface/PXFDetId.h"
+#include "Geometry/CaloGeometry/interface/CaloGeometry.h"
+#include "Geometry/CaloGeometry/interface/CaloCellGeometry.h"
+#include "Geometry/Records/interface/CaloGeometryRecord.h"
 
-  vHBHE_energy_EB_.assign( 2*HBHE_IPHI_NUM*HBHE_IETA_MAX_EB, 0. );
-  vHBHE_energy_.assign( 2*HBHE_IPHI_NUM*(HBHE_IETA_MAX_HE-1), 0. );
-  hEvt_HBHE_energy->Reset();
+#include "Geometry/Records/interface/TrackerDigiGeometryRecord.h"
+#include "Geometry/TrackerGeometryBuilder/interface/TrackerGeometry.h"
+#include "Geometry/TrackerGeometryBuilder/interface/StripGeomDetUnit.h"
 
-  edm::Handle<HBHERecHitCollection> HBHERecHitsH_;
-  iEvent.getByToken( HBHERecHitCollectionT_, HBHERecHitsH_ );
+#include "Calibration/IsolatedParticles/interface/DetIdFromEtaPhi.h"
+#include "MagneticField/Engine/interface/MagneticField.h"
+#include "MagneticField/Records/interface/IdealMagneticFieldRecord.h"
+#include "Calibration/IsolatedParticles/interface/CaloPropagateTrack.h"
 
-  /*
-  // Provides access to global cell position
-  edm::ESHandle<CaloGeometry> caloGeomH_;
-  iSetup.get<CaloGeometryRecord>().get( caloGeomH_ );
-  const CaloGeometry* caloGeom;
-  caloGeom = caloGeomH_.product();
-  */
+#include "DQM/HcalCommon/interface/Constants.h"
 
-  // Fill HBHE rechits 
-  for ( HBHERecHitCollection::const_iterator iRHit = HBHERecHitsH_->begin();
-        iRHit != HBHERecHitsH_->end(); ++iRHit ) {
+#include "FWCore/Framework/interface/Event.h"
+#include "FWCore/Framework/interface/MakerMacros.h"
+#include "FWCore/ParameterSet/interface/ParameterSet.h"
+#include "FWCore/Utilities/interface/InputTag.h"
+#include "FWCore/Utilities/interface/StreamID.h"
 
-    energy_ = iRHit->energy();
-    if ( energy_ <= zs ) continue;
-    // Get detector id and convert to histogram-friendly coordinates
-    // NOTE: HBHE detector ids are indexed by (ieta,iphi,depth)!
-    HcalDetId hId( iRHit->id() );
-    // NOTE: HBHE iphi = 1 does not correspond to EB iphi = 1!
-    // => Need to shift by 2 HBHE towers: HBHE::iphi: [1,...,71,72]->[3,4,...,71,72,1,2]
-    iphi_  = hId.iphi() + 2; // shift
-    iphi_  = iphi_ > HBHE_IPHI_MAX ? iphi_-HBHE_IPHI_MAX : iphi_; // wrap-around
-    iphi_  = iphi_ - 1; // make histogram-friendly
-    ietaAbs_  = hId.ietaAbs() == HBHE_IETA_MAX_HE ? HBHE_IETA_MAX_HE-1 : hId.ietaAbs(); // last HBHE ieta embedded
-    ieta_  = hId.zside() > 0 ? ietaAbs_-1 : -ietaAbs_;
-    //depth_ = hId.depth();
+#include "DataFormats/EgammaCandidates/interface/Photon.h"
+#include "DataFormats/EgammaCandidates/interface/PhotonFwd.h" // reco::PhotonCollection defined here
+#include "DataFormats/PatCandidates/interface/Photon.h"
+#include "DataFormats/TrackingRecHit/interface/TrackingRecHit.h"
+#include "DataFormats/TrackingRecHit/interface/TrackingRecHitFwd.h"
+#include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
+#include "DataFormats/HepMCCandidate/interface/GenParticle.h"
+#include "DataFormats/JetReco/interface/PFJet.h"
+#include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
+#include "DataFormats/JetReco/interface/GenJet.h"
+#include "DataFormats/JetReco/interface/GenJetCollection.h"
+#include "DataFormats/BTauReco/interface/JetTag.h"
+#include "DataFormats/BTauReco/interface/CandIPTagInfo.h"
+#include "DataFormats/Math/interface/deltaR.h"
+#include "DataFormats/Math/interface/deltaPhi.h"
 
-    // Fill vectors/histos by ieta range: /////////////////////////
+#include "FWCore/ServiceRegistry/interface/Service.h"
+#include "CommonTools/UtilAlgos/interface/TFileService.h"
+#include "TH1.h"
+#include "TH2.h"
+#include "TH3.h"
+#include "TProfile2D.h"
+#include "TTree.h"
+#include "TCanvas.h"
+#include "TStyle.h"
+#include "TMath.h"
+#include "TFile.h"
+#include "TFrame.h"
+#include "TBenchmark.h"
+#include "TRandom.h"
+#include "TSystem.h"
+#include "TVector3.h"
+#include "TVector2.h"
+#include <iostream>
 
-    // (A) hId.ieta() > 20: full extent of HBHE
-    // NOTE: HBHE iphis only occur in even numbers in coarse region
-    // => Fill adjacent (odd) iphi bin and split energy evenly.
-    if ( hId.ietaAbs() > HBHE_IETA_MAX_FINE ) {
-      // Fill intermediate helper histogram
-      hEvt_HBHE_energy->Fill( iphi_  , ieta_, energy_*0.5 );
-      hEvt_HBHE_energy->Fill( iphi_+1, ieta_, energy_*0.5 );
-      continue;
-    }
+#include "E2eDL/DataFormats/interface/FrameCollections.h"
+#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
-    // (B) hId.ieta() <= 20: fine iphi granularity (beyond this, iphi granularity is halved)
-    // Fill histograms normally
-    else {
-      hEvt_HBHE_energy->Fill( iphi_,ieta_,energy_ );
-    }
-
-    // (C) hId.ieta() <= 17: overlap with EB 
-    // Additionally, fill EB-overlap-only vectors/histograms
-    if ( hId.ietaAbs() > HBHE_IETA_MAX_EB ) continue;
-    // Create hashed index: maps from [ieta][iphi][:] -> [idx_]
-    // Effectively sums energies over depth for a given (ieta,iphi)
-    idx_ = ( ieta_+HBHE_IETA_MAX_EB )*HBHE_IPHI_NUM + iphi_;
-    // Fill vector for image
-    // NOTE: Must use '+=' since different depths can map to same iphi,ieta
-    vHBHE_energy_EB_[idx_] += energy_;
-    //pos = caloGeom->getPosition( hId );
-    //eta = pos.eta();
-    //vHBHE_energy_EB_[idx_] += energy_/TMath::CosH(eta); // pick out transverse component only
-
-  } // HBHE rechits
-
-  // Fill vector for full HBHE image using helper histogram
-  for (int ieta = 1; ieta < hEvt_HBHE_energy->GetNbinsY()+1; ieta++) {
-    for (int iphi = 1; iphi < hEvt_HBHE_energy->GetNbinsX()+1; iphi++) {
-
-      energy_ = hEvt_HBHE_energy->GetBinContent( iphi, ieta );
-      if ( energy_ <= zs ) continue;
-      idx_ = (ieta-1)*HBHE_IPHI_NUM + (iphi-1);
-      // Fill vector for image
-      vHBHE_energy_[idx_] = energy_;
-
-    } // iphi
-  } // ieta
+namespace e2e {
+  void fillHBHE ( const edm::Event&, const edm::EventSetup&, edm::EDGetTokenT<HBHERecHitCollection>, e2e::Frame1D, e2e::Frame1D );
 }
+#endif
