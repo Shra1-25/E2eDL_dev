@@ -66,6 +66,8 @@ void e2e::fillECALstitched ( const edm::Event& iEvent, const edm::EventSetup& iS
   
   edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
   edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
+  EBRecHitCollectionT_    = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("reducedEBRecHitCollection"));
+  EERecHitCollectionT_    = consumes<EcalRecHitCollection>(iConfig.getParameter<edm::InputTag>("reducedEERecHitCollection"));
   
   edm::Handle<EcalRecHitCollection> EBRecHitsH_;
   iEvent.getByToken( EBRecHitCollectionT_, EBRecHitsH_ );
