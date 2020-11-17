@@ -83,12 +83,6 @@ using pat::PhotonRef;*/
 using reco::PhotonCollection;
 using reco::PhotonRef;
 
-static const unsigned int Nproj = 5;
-//static const unsigned int Nadjproj = 2;
-static const unsigned int Nhitproj = 2;
-static const unsigned int nDetFrameH = 280;
-static const unsigned int nDetFrameW = 360;
-
 class DetFrameProducer : public edm::stream::EDProducer<> {
    public:
       
@@ -180,45 +174,6 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       int nTotal=0;
       int nPassed=0;
 };
-
-static const bool debug = false;
-
-
-static const int nTOB = 6;
-static const int nTEC = 9;
-static const int nTIB = 4;
-static const int nTID = 3;
-static const int nBPIX = 4;
-static const int nFPIX = 3;
-
-static const int EB_IPHI_MIN = EBDetId::MIN_IPHI;//1;
-static const int EB_IETA_MIN = EBDetId::MIN_IETA;//1;
-static const int EE_MIN_IX = EEDetId::IX_MIN;//1;
-static const int EE_MIN_IY = EEDetId::IY_MIN;//1;
-static const int EE_MAX_IX = EEDetId::IX_MAX;//100;
-static const int EE_MAX_IY = EEDetId::IY_MAX;//100;
-static const int EE_NC_PER_ZSIDE = EEDetId::IX_MAX*EEDetId::IY_MAX; // 100*100
-static const int HBHE_IETA_MAX_FINE = 20;
-static const int HBHE_IETA_MAX_HB = hcaldqm::constants::IETA_MAX_HB;//16;
-static const int HBHE_IETA_MIN_HB = hcaldqm::constants::IETA_MIN_HB;//1;
-static const int HBHE_IPHI_MIN = hcaldqm::constants::IPHI_MIN;//1;
-static const int HBHE_IPHI_MAX = hcaldqm::constants::IPHI_MAX;//72;
-
-
-static const std::string projections[Nproj] = {"", "_atECAL", "_atHCAL","_atECALfixIP","_atECALfixIPfromPV"}; //57425
-static const std::string hit_projections[Nhitproj] = {"", "_atPV"};
-static const int eta_nbins_HBHE = 2*(HBHE_IETA_MAX_HE-1);
-static const int granularityMultiECAL=5;
-
-// HBHE eta bin edges
-static const double eta_bins_HBHE[2*(hcaldqm::constants::IETA_MAX_HE-1)+1] =
-                  {-3.000, -2.650, -2.500, -2.322, -2.172, -2.043, -1.930, -1.830, -1.740, -1.653, -1.566, -1.479, -1.392, -1.305,
-                   -1.218, -1.131, -1.044, -0.957, -0.870, -0.783, -0.695, -0.609, -0.522, -0.435, -0.348, -0.261, -0.174, -0.087, 0.000,
-                    0.087,  0.174,  0.261,  0.348,  0.435,  0.522,  0.609,  0.695,  0.783,  0.870,  0.957,  1.044,  1.131,  1.218,
-                    1.305,  1.392,  1.479,  1.566,  1.653,  1.740,  1.830,  1.930,  2.043,  2.172,  2.322,  2.500,  2.650,  3.000}; // 57
-//
-// static data member definitions
-//
 
 #endif
 //DEFINE_FWK_MODULE(DetFrameProducer);
