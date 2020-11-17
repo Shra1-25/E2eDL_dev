@@ -1,5 +1,5 @@
-#ifndef RecoE2E_fillECALstitched_h
-#define RecoE2E_fillECALstitched_h
+#ifndef RecoE2E_fillHBHE_h
+#define RecoE2E_fillHBHE_h
 
 #include <memory>
 #include <vector>
