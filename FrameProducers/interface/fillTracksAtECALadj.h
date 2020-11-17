@@ -74,6 +74,13 @@
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/constants.h"
 
+unsigned int granularityMultiPhi[Nadjproj];
+unsigned int granularityMultiEta[Nadjproj];
+      
+int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
+int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
+std::vector<double> adjEtaBins[Nadjproj];
+
 typedef reco::VertexCollection  PVCollection;
 edm::EDGetTokenT<PVCollection> pvCollectionT_;
 namespace e2e {
