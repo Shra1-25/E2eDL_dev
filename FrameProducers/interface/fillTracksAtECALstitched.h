@@ -75,7 +75,7 @@
 #include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 namespace e2e {
-  void fillTracksAtECALstitched ( const edm::Event&, const edm::EventSetup&, unsigned int, edm::EDGetTokenT<EcalRecHitCollection>, edm::EDGetTokenT<EcalRecHitCollection>, e2e::Frame2D, e2e::Frame2D, e2e::Frame2D );
+  void fillTracksAtECALadjustable ( const edm::Event&, const edm::EventSetup&, unsigned int, edm::EDGetTokenT<EcalRecHitCollection>, edm::EDGetTokenT<EcalRecHitCollection>, e2e::Frame2D, e2e::Frame2D, e2e::Frame2D );
   std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
   void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);
 }
