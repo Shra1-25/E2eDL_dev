@@ -93,6 +93,8 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       ~DetFrameProducer();
       
       static void fillDescriptions(edm::ConfigurationDescriptions& descriptions);
+      edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
+      edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
 
    private:
       virtual void beginStream(edm::StreamID) override;
