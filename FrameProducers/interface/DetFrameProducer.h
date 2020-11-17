@@ -86,9 +86,6 @@ static const unsigned int Nadjproj = 2;
 static const unsigned int nDetFrameH = 280;
 static const unsigned int nDetFrameW = 360;
 
-edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
-edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
-
 class DetFrameProducer : public edm::stream::EDProducer<> {
    public:
       
@@ -109,10 +106,10 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
 
       // ----------member data ---------------------------
       // Tokens
-      //edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
+      edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
       edm::EDGetTokenT<PhotonCollection> photonCollectionT_;
       edm::EDGetTokenT<HBHERecHitCollection> HBHERecHitCollectionT_;
-      //edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
+      edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
       edm::EDGetTokenT<reco::TrackCollection> trackCollectionT_;
       edm::EDGetTokenT<reco::VertexCollection> vertexCollectionT_;
       edm::EDGetTokenT<reco::PFJetCollection> jetCollectionT_;
