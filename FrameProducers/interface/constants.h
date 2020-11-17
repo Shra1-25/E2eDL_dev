@@ -19,12 +19,6 @@ static const unsigned int nDetFrameW = 360;
 static const bool debug = false;
 
 static const std::string adj_projections[Nadjproj] = {"_5x5", "_3x3"};
-unsigned int granularityMultiPhi[Nadjproj];
-unsigned int granularityMultiEta[Nadjproj];
-      
-int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
-int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
-std::vector<double> adjEtaBins[Nadjproj];
 
 static const int nTOB = 6;
 static const int nTEC = 9;
