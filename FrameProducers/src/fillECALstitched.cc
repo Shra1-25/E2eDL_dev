@@ -63,7 +63,10 @@ void e2e::fillECALstitched ( const edm::Event& iEvent, const edm::EventSetup& iS
 
   vECAL_energy_.assign( 2*ECAL_IETA_MAX_EXT*EB_IPHI_MAX, 0. );
   for ( int iz(0); iz < nEE; ++iz ) hEvt_EE_energy[iz]->Reset();
-
+  
+  edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
+  edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
+  
   edm::Handle<EcalRecHitCollection> EBRecHitsH_;
   iEvent.getByToken( EBRecHitCollectionT_, EBRecHitsH_ );
   edm::Handle<EcalRecHitCollection> EERecHitsH_;
