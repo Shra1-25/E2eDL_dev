@@ -156,8 +156,8 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       edm::EDGetTokenT<PFCollection> pfCollectionT_;
       
       void fillEB             ( const edm::Event&, const edm::EventSetup& );
-      //void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
-      void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
+      void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
+      //void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
       
       //std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
       //void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);   
