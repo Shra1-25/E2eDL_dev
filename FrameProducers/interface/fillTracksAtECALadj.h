@@ -74,15 +74,6 @@
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/constants.h"
 
-static const unsigned int Nadjproj = 2;
-static const std::string adj_projections[Nadjproj] = {"_5x5", "_3x3"};
-static const int HBHE_IPHI_NUM = hcaldqm::constants::IPHI_NUM;//72;
-unsigned int granularityMultiPhi[Nadjproj];
-unsigned int granularityMultiEta[Nadjproj];
-      
-int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
-int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
-std::vector<double> adjEtaBins[Nadjproj];
 typedef reco::VertexCollection  PVCollection;
 edm::EDGetTokenT<PVCollection> pvCollectionT_;
 namespace e2e {
