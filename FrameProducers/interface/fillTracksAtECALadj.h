@@ -73,7 +73,7 @@
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 
-static const unsigned int Nadjproj;
+static const unsigned int Nadjproj = 2;
 unsigned int granularityMultiPhi[Nadjproj];
 unsigned int granularityMultiEta[Nadjproj];
       
