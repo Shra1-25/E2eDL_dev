@@ -108,12 +108,6 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    }
    
    if (doECALstitched){
-	edm::Handle<EcalRecHitCollection> EBRecHitsH_;
-  	iEvent.getByToken( EBRecHitCollectionT_, EBRecHitsH_ );
-  	edm::Handle<EcalRecHitCollection> EERecHitsH_;
-  	iEvent.getByToken( EERecHitCollectionT_, EERecHitsH_ );
-  	edm::ESHandle<CaloGeometry> caloGeomH_;
-  	iSetup.get<CaloGeometryRecord>().get( caloGeomH_ );
 	e2e::fillECALstitched (iEvent, iSetup, vECAL_energy_ );
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vECAL_energy_.size(); idx++){
