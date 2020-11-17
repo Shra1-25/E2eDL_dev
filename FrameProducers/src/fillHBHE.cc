@@ -3,7 +3,7 @@
 TH2F *hEvt_HBHE_energy;
 
 // Fill HBHE rechits _________________________________________________________________//
-void DetFrameProducer::fillHBHE ( const edm::Event& iEvent, const edm::EventSetup& iSetup, edm::EDGetTokenT<HBHERecHitCollection> HBHERecHitCollectionT_, e2e::Frame1D vHBHE_energy_, e2e::Frame1D vHBHE_energy_EB_ ) {
+void e2e::fillHBHE ( const edm::Event& iEvent, const edm::EventSetup& iSetup, edm::EDGetTokenT<HBHERecHitCollection> HBHERecHitCollectionT_, e2e::Frame1D vHBHE_energy_, e2e::Frame1D vHBHE_energy_EB_ ) {
 
   // Intermediate helper histogram (single event only)
   hEvt_HBHE_energy = new TH2F("evt_HBHE_energy", "E(i#phi,i#eta);i#phi;i#eta",
