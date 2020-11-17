@@ -1,4 +1,4 @@
-#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+/*#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 TH2F *hEvt_HBHE_energy;
 
@@ -30,7 +30,7 @@ void DetFrameProducer::fillHBHE ( const edm::Event& iEvent, const edm::EventSetu
   */
 
   // Fill HBHE rechits 
-  for ( HBHERecHitCollection::const_iterator iRHit = HBHERecHitsH_->begin();
+  /*for ( HBHERecHitCollection::const_iterator iRHit = HBHERecHitsH_->begin();
         iRHit != HBHERecHitsH_->end(); ++iRHit ) {
 
     energy_ = iRHit->energy();
@@ -93,3 +93,4 @@ void DetFrameProducer::fillHBHE ( const edm::Event& iEvent, const edm::EventSetu
     } // iphi
   } // ieta
 }
+*/
