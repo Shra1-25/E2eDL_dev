@@ -74,6 +74,7 @@
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 
 static const unsigned int Nadjproj = 2;
+static const std::string adj_projections[Nadjproj] = {"_5x5", "_3x3"};
 unsigned int granularityMultiPhi[Nadjproj];
 unsigned int granularityMultiEta[Nadjproj];
       
