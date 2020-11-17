@@ -74,6 +74,7 @@
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/fillECALstitched.h"
 #include "E2eDL/FrameProducers/interface/fillHBHE.h"
+#include "E2eDL/FrameProducers/interface/fillTracksAtECALstitched.h"
 
 using namespace std;
 /*using pat::PhotonCollection;
@@ -155,8 +156,7 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       edm::EDGetTokenT<PFCollection> pfCollectionT_;
       
       void fillEB             ( const edm::Event&, const edm::EventSetup& );
-      //void fillHBHE           ( const edm::Event&, const edm::EventSetup& );
-      void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
+      //void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
       void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
       
       std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
