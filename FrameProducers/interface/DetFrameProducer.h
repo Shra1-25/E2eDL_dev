@@ -108,10 +108,10 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
 
       // ----------member data ---------------------------
       // Tokens
-      edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
+      //edm::EDGetTokenT<EcalRecHitCollection> EBRecHitCollectionT_; 
       edm::EDGetTokenT<PhotonCollection> photonCollectionT_;
       edm::EDGetTokenT<HBHERecHitCollection> HBHERecHitCollectionT_;
-      edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
+      //edm::EDGetTokenT<EcalRecHitCollection> EERecHitCollectionT_;
       edm::EDGetTokenT<reco::TrackCollection> trackCollectionT_;
       edm::EDGetTokenT<reco::VertexCollection> vertexCollectionT_;
       edm::EDGetTokenT<reco::PFJetCollection> jetCollectionT_;
