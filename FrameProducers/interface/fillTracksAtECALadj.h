@@ -74,6 +74,14 @@
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
+unsigned int granularityMultiPhi[Nadjproj];
+unsigned int granularityMultiEta[Nadjproj];
+      
+int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
+int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
+std::vector<double> adjEtaBins[Nadjproj];
+typedef reco::VertexCollection  PVCollection;
+edm::EDGetTokenT<PVCollection> pvCollectionT_;
 namespace e2e {
   void fillTracksAtECALadjustable ( const edm::Event&, const edm::EventSetup&, unsigned int, edm::EDGetTokenT<EcalRecHitCollection>, edm::EDGetTokenT<EcalRecHitCollection>, e2e::Frame2D, e2e::Frame2D, e2e::Frame2D );
   std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
