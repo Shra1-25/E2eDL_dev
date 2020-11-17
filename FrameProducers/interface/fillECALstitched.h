@@ -75,6 +75,6 @@
 #include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 namespace e2e {
-  void e2e::fillECALstitched ( const edm::Event&, const edm::EventSetup&, e2e::Frame1D );
+  void fillECALstitched ( const edm::Event&, const edm::EventSetup&, e2e::Frame1D );
 }
 #endif
