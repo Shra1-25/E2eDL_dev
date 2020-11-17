@@ -114,12 +114,12 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
   	iEvent.getByToken( EERecHitCollectionT_, EERecHitsH_ );
   	edm::ESHandle<CaloGeometry> caloGeomH_;
   	iSetup.get<CaloGeometryRecord>().get( caloGeomH_ );
-	vECALstitched_energy_ = e2e::fillECALstitched (EBRecHitsH_, EERecHitsH_, caloGeomH_);
+	e2e::fillECALstitched (iEvent, iSetup, vECAL_energy_ );
 	// reshape detector image arrays to 280x360
-	for (unsigned int idx=0; idx<vECALstitched_energy_.size(); idx++){
-		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECALstitched_energy_[idx];
+	for (unsigned int idx=0; idx<vECAL_energy_.size(); idx++){
+		vECAL_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vECAL_energy_[idx];
 	}
-   	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECALstitched_energy_));
+   	std::unique_ptr<e2e::Frame1D> ECALstitched_energy_edm (new e2e::Frame1D(vECAL_energy_));
    	std::cout<<" >> Size of Stitched ECAL Energy vector is: "<<std::move(ECALstitched_energy_edm).get()->size()<<std::endl;
    	//iEvent.put(std::move(ECALstitched_energy_edm), "ECALstitchedenergy");
    	vDetFrames.push_back(vECAL_energy_reshaped);
