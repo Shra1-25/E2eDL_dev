@@ -10,7 +10,6 @@ static const unsigned int nDetFrameW = 360;
 static const bool debug = false;
 
 static const std::string adj_projections[Nadjproj] = {"_5x5", "_3x3"};
-static const int HBHE_IPHI_NUM = hcaldqm::constants::IPHI_NUM;//72;
 unsigned int granularityMultiPhi[Nadjproj];
 unsigned int granularityMultiEta[Nadjproj];
       
