@@ -93,7 +93,7 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    e2e::Frame2D vECALadj_tracksPt_reshaped (nDetFrameH, e2e::Frame1D (nDetFrameW,0.));
  
    if (doHBHEenergy){
-   	fillHBHE (iEvent, iSetup );
+   	fillHBHE (iEvent, iSetup, HBHERecHitCollectionT_, vHBHE_energy_, vHBHE_energy_EB_ );
 	// reshape detector image arrays to 280x360
 	for (unsigned int idx=0; idx<vHBHE_energy_.size(); idx++){
 		vHBHE_energy_reshaped[int(idx/nDetFrameW)][idx%nDetFrameW]=vHBHE_energy_[idx];
