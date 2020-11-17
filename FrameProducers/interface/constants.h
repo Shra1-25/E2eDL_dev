@@ -1,6 +1,15 @@
 #ifndef RecoE2E_constants_h
 #define RecoE2E_constants_h
 
+#include <memory>
+#include <vector>
+#include <iostream>
+#include "DataFormats/EcalDetId/interface/EBDetId.h"
+#include "DataFormats/EcalDetId/interface/EEDetId.h"
+#include "DataFormats/EcalDetId/interface/ESDetId.h"
+#include "DQM/HcalCommon/interface/Constants.h"
+using namespace std;
+
 static const unsigned int Nproj = 5;
 static const unsigned int Nadjproj = 2;
 static const unsigned int Nhitproj = 2;
