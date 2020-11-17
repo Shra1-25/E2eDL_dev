@@ -72,7 +72,12 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
+#include "E2eDL/FrameProducers/interface/constants.h"
 //#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+
+static const int HBHE_IPHI_NUM = hcaldqm::constants::IPHI_NUM;//72;
+static const int HBHE_IPHI_MIN = hcaldqm::constants::IPHI_MIN;//1;
+static const int HBHE_IPHI_MAX = hcaldqm::constants::IPHI_MAX;//72;
 
 namespace e2e {
   void fillHBHE ( const edm::Event&, const edm::EventSetup&, edm::EDGetTokenT<HBHERecHitCollection>, e2e::Frame1D, e2e::Frame1D );
