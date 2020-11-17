@@ -46,6 +46,7 @@ void fillECAL_with_EEproj ( std::vector<float>& vECAL_energy_, TH2F *hEvt_EE_ene
 
 // Fill stitched EE-, EB, EE+ rechits ________________________________________________________//
 void e2e::fillECALstitched ( const edm::Event& iEvent, const edm::EventSetup& iSetup, e2e::Frame1D vECAL_energy_ ) {
+  
   // Intermediate helper histogram (single event only)
   hEvt_EE_energy[0] = new TH2F("evt_EEm_energy", "E(i#phi,i#eta);i#phi;i#eta",
       EB_IPHI_MAX, -TMath::Pi(), TMath::Pi(),
@@ -63,12 +64,12 @@ void e2e::fillECALstitched ( const edm::Event& iEvent, const edm::EventSetup& iS
   vECAL_energy_.assign( 2*ECAL_IETA_MAX_EXT*EB_IPHI_MAX, 0. );
   for ( int iz(0); iz < nEE; ++iz ) hEvt_EE_energy[iz]->Reset();
 
-  /*edm::Handle<EcalRecHitCollection> EBRecHitsH_;
+  edm::Handle<EcalRecHitCollection> EBRecHitsH_;
   iEvent.getByToken( EBRecHitCollectionT_, EBRecHitsH_ );
   edm::Handle<EcalRecHitCollection> EERecHitsH_;
   iEvent.getByToken( EERecHitCollectionT_, EERecHitsH_ );
   edm::ESHandle<CaloGeometry> caloGeomH_;
-  iSetup.get<CaloGeometryRecord>().get( caloGeomH_ );*/
+  iSetup.get<CaloGeometryRecord>().get( caloGeomH_ );
   const CaloGeometry* caloGeom = caloGeomH_.product();
 
   // Fill the EE+/-(phi,eta) projection with the EE hits.
