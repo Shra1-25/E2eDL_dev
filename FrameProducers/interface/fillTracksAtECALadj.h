@@ -73,7 +73,7 @@
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
 #include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
-extern static const unsigned int Nadjproj;
+extern unsigned int Nadjproj;
 unsigned int granularityMultiPhi[Nadjproj];
 unsigned int granularityMultiEta[Nadjproj];
       
