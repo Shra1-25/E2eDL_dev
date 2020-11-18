@@ -1,4 +1,4 @@
-/*#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
+#include "E2eDL/FrameProducers/interface/DetFrameProducer.h"
 
 TH2F *hEvt_Adj_tracks[Nadjproj];
 TH2F *hEvt_Adj_tracksPt[Nadjproj];
@@ -264,4 +264,4 @@ void DetFrameProducer::fillTracksAtECALadjustable ( const edm::Event& iEvent, co
       vECALadj_tracksPt_max_[proj][index1d]=hEvt_Adj_tracksPt_max[proj]->GetBinContent(iphi,ieta);
     }
   }
-} // fillTracksAtECALadjustable()*/
+} // fillTracksAtECALadjustable()
