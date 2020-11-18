@@ -134,8 +134,8 @@ DetFrameProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup)
    if (doTracksAtECALadjPt){
    	for (unsigned int i=0;i<Nadjproj;i++)
    	{
-     		//e2e::fillTracksAtECALadjustable( iEvent, iSetup, i, EBRecHitCollectionT_, EERecHitCollectionT_, trackCollectionT_, vECALadj_tracksPt_, vECALadj_tracks_, vECALadj_tracksPt_max_ );
-     		fillTracksAtECALadjustable( iEvent, iSetup, i);
+     		e2e::fillTracksAtECALadjustable( iEvent, iSetup, i, EBRecHitCollectionT_, EERecHitCollectionT_, trackCollectionT_, vECALadj_tracksPt_, vECALadj_tracks_, vECALadj_tracksPt_max_ );
+     		//fillTracksAtECALadjustable( iEvent, iSetup, i);
 		//fillTRKlayersAtECALadjustable( iEvent, iSetup, i );
    	}
 	// reshape detector image arrays to 280x360
