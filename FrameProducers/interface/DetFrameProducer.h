@@ -72,7 +72,7 @@
 #include <iostream>
 
 #include "E2eDL/DataFormats/interface/FrameCollections.h"
-#include "E2eDL/FrameProducers/interface/constants.h"
+//#include "E2eDL/FrameProducers/interface/constants.h"
 #include "E2eDL/FrameProducers/interface/fillECALstitched.h"
 #include "E2eDL/FrameProducers/interface/fillHBHE.h"
 #include "E2eDL/FrameProducers/interface/fillTracksAtECALadj.h"
@@ -152,10 +152,10 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       
       void fillEB             ( const edm::Event&, const edm::EventSetup& );
       void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
-      void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
+      /*void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
       
       std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
-      void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);   
+      void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);*/   
       
       std::vector<float>& read_vEB_energy     (int);
       
