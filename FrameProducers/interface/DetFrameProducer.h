@@ -152,20 +152,20 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       
       void fillEB             ( const edm::Event&, const edm::EventSetup& );
       void fillTracksAtECALstitched (const edm::Event&, const edm::EventSetup& );
-      //void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
+      void fillTracksAtECALadjustable   ( const edm::Event&, const edm::EventSetup&, unsigned int proj );
       
-      //std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
-      //void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);   
+      std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
+      void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);   
       
       std::vector<float>& read_vEB_energy     (int);
       
       int iphi_Emax, ieta_Emax;
-      /*unsigned int granularityMultiPhi[Nadjproj];
+      unsigned int granularityMultiPhi[Nadjproj];
       unsigned int granularityMultiEta[Nadjproj];
       
       int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
       int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
-      std::vector<double> adjEtaBins[Nadjproj];*/
+      std::vector<double> adjEtaBins[Nadjproj];
       
       e2e::Frame1D vIphi_Emax_;
       e2e::Frame1D vIeta_Emax_;
