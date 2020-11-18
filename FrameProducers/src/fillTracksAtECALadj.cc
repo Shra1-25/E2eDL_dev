@@ -1,6 +1,6 @@
 
 #include "E2eDL/FrameProducers/interface/fillTracksAtECALadj.h"
-/*
+
 TH2F *hEvt_Adj_tracks[Nadjproj];
 TH2F *hEvt_Adj_tracksPt[Nadjproj];
 TH2F *hEvt_Adj_tracksPt_max[Nadjproj];
@@ -265,4 +265,4 @@ void e2e::fillTracksAtECALadjustable ( const edm::Event& iEvent, const edm::Even
       vECALadj_tracksPt_max_[proj][index1d]=hEvt_Adj_tracksPt_max[proj]->GetBinContent(iphi,ieta);
     }
   }
-} // fillTracksAtECALadjustable()*/
+} // fillTracksAtECALadjustable()
