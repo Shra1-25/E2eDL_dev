@@ -160,12 +160,12 @@ class DetFrameProducer : public edm::stream::EDProducer<> {
       std::vector<float>& read_vEB_energy     (int);
       
       int iphi_Emax, ieta_Emax;
-      unsigned int granularityMultiPhi[Nadjproj];
+      /*unsigned int granularityMultiPhi[Nadjproj];
       unsigned int granularityMultiEta[Nadjproj];
       
       int totalEtaBins[Nadjproj];// = totalMultiEta*(eta_nbins_HBHE);
       int totalPhiBins[Nadjproj];// = granularityMultiPhi * granularityMultiECAL*HBHE_IPHI_NUM;
-      std::vector<double> adjEtaBins[Nadjproj];
+      std::vector<double> adjEtaBins[Nadjproj];*/
       
       e2e::Frame1D vIphi_Emax_;
       e2e::Frame1D vIeta_Emax_;
