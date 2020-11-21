@@ -84,7 +84,7 @@ std::vector<double> adjEtaBins[Nadjproj];
 typedef reco::VertexCollection  PVCollection;
 edm::EDGetTokenT<PVCollection> pvCollectionT_;
 namespace e2e {
-  void fillTracksAtECALadjustable ( const edm::Event&, const edm::EventSetup&, unsigned int, edm::EDGetTokenT<EcalRecHitCollection>, edm::EDGetTokenT<EcalRecHitCollection>,  edm::EDGetTokenT<reco::TrackCollection>, e2e::Frame1D&, e2e::Frame1D&, e2e::Frame1D& );
+  void fillTracksAtECALadjustable ( const edm::Event&, const edm::EventSetup&, unsigned int, edm::EDGetTokenT<EcalRecHitCollection>, edm::EDGetTokenT<EcalRecHitCollection>,  edm::EDGetTokenT<reco::TrackCollection>, e2e::Frame1D (&vECALadj_tracksPt_)[Nadjproj], e2e::Frame1D (&vECALadj_tracks_)[Nadjproj], e2e::Frame1D (&vECALadj_tracksPt_max_)[Nadjproj]);
   std::vector<int> findSubcrystal(const CaloGeometry* caloGeom, const float& eta, const float& phi, const int& granularityMultiEta, const int& granularityMultiPhi);
   void fillByBinNumber(TH2F * histo, const std::vector<int>& phi_eta, const float& value);
 }
